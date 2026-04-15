@@ -127,8 +127,8 @@ def main():
     OBELIX = import_obelix("obelix.py")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    q_net      = DQN().to(device)
-    target_net = DQN().to(device)
+    q_net      = DQN()
+    target_net = DQN()
     target_net.load_state_dict(q_net.state_dict())
     target_net.eval()
 
