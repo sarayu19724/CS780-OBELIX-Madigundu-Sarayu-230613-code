@@ -29,13 +29,13 @@ class DQN(nn.Module):
             nn.Linear(in_dim, 128), nn.ReLU(),
             nn.Linear(128, 128),   nn.ReLU(),
         )
-        self.value_stream     = nn.Linear(128, 1)
-        self.advantage_stream = nn.Linear(128, n_actions)
+        self.value = nn.Linear(128, 1)
+        self.advantage = nn.Linear(128, n_actions)
 
     def forward(self, x):
         f = self.shared(x)
-        v = self.value_stream(f)
-        a = self.advantage_stream(f)
+        v = self.value(f)
+        a = self.advantage(f)
         return v + (a - a.mean(dim=-1, keepdim=True))
 
 
